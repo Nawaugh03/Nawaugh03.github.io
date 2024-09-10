@@ -7,61 +7,59 @@
   <meta name="description" content="">
   <title>Home</title>
   <style>
-    body {
-      background: linear-gradient(black, red);
-      min-height: 100vh;
+     body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #000000, #d5301a,  #000000);
+      color: white;
+      text-align: center;
+    }
+
+    nav {
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
       margin: 0;
       display: flex;
       justify-content: center;
-      align-items: center;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
       color: white;
-      font-family: Arial, sans-serif;
-    }
-    nav {
-	width:100%;
-	background-color: rgba(0,0,0,0.7);
-	text-align: center;
-	padding: 10px 0;
-	display: flex;
-	position: sticky;
-	top: 0;
-    }
-    nav ul {
-	list-style-type: none;
-	padding:0;
-	margin: 0;
-	display: flex;
-	justify-content: center;
+      text-decoration: none;
+      font-weight: bold;
     }
 
-    nav ul li{
-	margin: 0 15px;
-    }
-    nav ul li a{
-	text-decoration: none;
-	color:white;
-	font-weight: bold;
-    }
-    .container{
-	    max-width:1200px;
-	    width: 100%;
-	    padding:20px;
-    }
-    .section{
-	    margin-bottom: 50px;
-    }
-    .section h2{
-	    text-align: center;
-	    margin-bottom:20px;
-	    font-size: 2em;
+    nav ul li a:hover {
+      color: #ffcc00;
     }
 
-    .skills, .projects{
-	    display: flex;
-	    justify-content: space-around;
-	    flex-wrap: warp;
+    header {
+      padding: 50px 0;
     }
 
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px;
+    }
+   
 	  </style>
 	  <link rel="icon" href=".../docs/assets/img/icons8-magic-book-16.png" type="image/png">
 	</head>
@@ -76,7 +74,10 @@
         </li>
       </ul>
     </nav>
-    <img src="docs/assets/img/Portfolio.jpg" style="display: block; margin-left: auto; margin-right: auto;" width="300" height="300">
+  <img src="docs/assets/img/Portfolio.jpg" style="display: block; margin-left: auto; margin-right: auto;  border-radius:50%; object-fit: cover;" width="300" height="300">
+  <h2>
+    Data Analyst / Python Programmer
+  </h2>
   </div>
 </body>
 </html>
