@@ -69,3 +69,13 @@ header h1 {
 h2{
   text-decoration: underline;
 }
+
+ul li a{
+  color: white;
+  text-decoration: none;
+  font-weight: bold; 
+}
+ul li a:hover {
+  color: #ffcc00;
+  text-decoration: underline;
+}
