@@ -59,3 +59,13 @@ header h1 {
   height: auto; /* Keep the aspect ratio */
   border-radius: 50%; /* Makes the image circular */
 }
+
+.centered-list {
+  list-style-type: none; /* Optional: Remove default bullets */
+  text-align: center; /* Center the list items */
+  padding: 0; /* Remove default padding */
+}
+
+h2{
+  text-decoration: underline;
+}
