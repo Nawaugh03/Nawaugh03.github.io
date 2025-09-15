@@ -101,24 +101,34 @@
     }
 
     function botResponse(text) {
-      text = text.toLowerCase();
-      let response;
+        text = text.toLowerCase();
+        let response;
 
-      if (text.includes("hello") || text.includes("hi")) {
-        response = "Hi sweetie! How are you today?";
-      } else if (text.includes("how are you")) {
-        response = "I'm good, honey! Did you eat today?";
-      } else if (text.includes("love")) {
-        response = "I love you too! ❤️";
-      } else if (text.includes("homework")) {
-        response = "Don't forget to take breaks! You can do it!";
-      } else if (text.includes("receipt")) {
-        response = "Oh! You want me to check the receipt? I can't do that yet, but soon I will!";
-      } else {
-        response = "Hmm… tell me more, sweetie.";
-      }
+        if (text.includes("hello") || text.includes("hi")) {
+            response = "Hi sweetie! How are you today?";
+        } else if (text.includes("how are you")) {
+            response = "I'm good, honey! Did you eat today?";
+        } else if (text.includes("love")) {
+            response = "I love you too! ❤️";
+        } else if (text.includes("homework")) {
+            response = "Don't forget to take breaks! You can do it!";
+        } else if (text.includes("receipt")) {
+            response = "Oh! You want me to check the receipt? I can't do that yet, but soon I will!";
+        } else if (text.includes("bye") || text.includes("goodbye")) {
+            response = "Goodbye sweetie have a good day!";
+            addMessage(response, "bot");
 
-      addMessage(response, "bot");
+            // Pause for 3 seconds, then redirect
+            setTimeout(() => {
+            window.location.href = "index.html";
+            }, 3000);
+
+            return; // Stop further processing
+        } else {
+            response = "Hmm… tell me more, sweetie.";
+        }
+
+        addMessage(response, "bot");
     }
 
     sendBtn.addEventListener("click", () => {
