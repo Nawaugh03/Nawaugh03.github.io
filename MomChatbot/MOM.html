@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mom Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    /* Chat container */
+    #chatbox {
+      width: 350px;
+      max-height: 500px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background-color: white;
+    }
+
+    #messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 15px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .user {
+      background-color: #cce5ff;
+      align-self: flex-end;
+      text-align: right;
+    }
+
+    .bot {
+      background-color: #d4edda;
+      align-self: flex-start;
+      text-align: left;
+    }
+
+    #inputArea {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+
+    #userInput {
+      flex: 1;
+      border: none;
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    #sendBtn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    #sendBtn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mom Chatbot</h1>
+
+  <div id="chatbox">
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input type="text" id="userInput" placeholder="Say something...">
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const messagesDiv = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = text;
+      messagesDiv.appendChild(msg);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    function botResponse(text) {
+      text = text.toLowerCase();
+      let response;
+
+      if (text.includes("hello") || text.includes("hi")) {
+        response = "Hi sweetie! How are you today?";
+      } else if (text.includes("how are you")) {
+        response = "I'm good, honey! Did you eat today?";
+      } else if (text.includes("love")) {
+        response = "I love you too! ❤️";
+      } else if (text.includes("homework")) {
+        response = "Don't forget to take breaks! You can do it!";
+      } else if (text.includes("receipt")) {
+        response = "Oh! You want me to check the receipt? I can't do that yet, but soon I will!";
+      } else {
+        response = "Hmm… tell me more, sweetie.";
+      }
+
+      addMessage(response, "bot");
+    }
+
+    sendBtn.addEventListener("click", () => {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage(text, "user"); // show user message
+      botResponse(text);        // bot reply
+      userInput.value = "";     // clear input
+    });
+
+    userInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendBtn.click();
+    });
+
+    // Initial greeting
+    addMessage("Hi honey! I'm your Mom Chatbot. Say hi to start!", "bot");
+  </script>
+</body>
+</html>
