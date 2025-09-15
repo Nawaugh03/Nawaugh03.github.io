@@ -3,19 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Mom Chatbot</title>
+  <!-- Link your external CSS -->
+  <link rel="stylesheet" href="Templates/style.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      text-align: center;
-    }
-
-    /* Chat container */
+    /* Chatbot-specific overrides */
     #chatbox {
       width: 350px;
       max-height: 500px;
@@ -26,13 +17,15 @@
       flex-direction: column;
       overflow: hidden;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      background-color: white;
+      background-color: rgba(255,255,255,0.1); /* Slight transparent background */
+      color: white;
     }
 
     #messages {
       flex: 1;
       padding: 10px;
       overflow-y: auto;
+      text-align: left;
     }
 
     .message {
@@ -44,20 +37,20 @@
     }
 
     .user {
-      background-color: #cce5ff;
+      background-color: rgba(0,123,255,0.6);
       align-self: flex-end;
       text-align: right;
     }
 
     .bot {
-      background-color: #d4edda;
+      background-color: rgba(40,167,69,0.6);
       align-self: flex-start;
       text-align: left;
     }
 
     #inputArea {
       display: flex;
-      border-top: 1px solid #ccc;
+      border-top: 1px solid rgba(255,255,255,0.3);
     }
 
     #userInput {
@@ -65,6 +58,8 @@
       border: none;
       padding: 10px;
       font-size: 14px;
+      background-color: rgba(0,0,0,0.3);
+      color: white;
     }
 
     #sendBtn {
