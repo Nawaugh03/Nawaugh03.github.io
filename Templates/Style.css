@@ -5,12 +5,16 @@ body {
     background: linear-gradient(to right, #000000, #d5301a,  #000000);
     color: white;
     text-align: center;
+
   }
 
 nav {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 1rem;
     position: sticky;
+    height:60px;
+    justify-content: center; /* Horizontally center the ul */
+    align-items: center; /* Vertically center the ul */
     top: 0;
   }
 
@@ -19,7 +23,8 @@ nav ul {
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Horizontally center the ul */
+    font-size: 1.5rem; 
   }
 
 nav ul li {
