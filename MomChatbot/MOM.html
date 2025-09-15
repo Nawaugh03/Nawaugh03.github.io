@@ -4,31 +4,29 @@
   <meta charset="UTF-8">
   <title>Mom Chatbot</title>
   <!-- Link your external CSS -->
-  <link rel="stylesheet" href="../Templates/style.css">
+  <link rel="stylesheet" href="htts://Nawaugh03.github.io//Templates//style.css">
   <style>
-    
     /* Chatbot-specific overrides */
     #chatbox {
       width: 350px;
       max-height: 500px;
-      border: 1px solid #ccc;
       border-radius: 10px;
-      margin: 20px auto;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      background-color: rgba(0,0,0,0.4); /* semi-transparent black */
-      border: 1px solid rgba(255,255,255,0.3); /* subtle border */
-      color: white; /* text inside is white */
+      background-color: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      margin: 20px auto;
     }
 
     #messages {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* default left alignment */
-    padding: 10px;
-    overflow-y: auto;
-    text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+      overflow-y: auto;
+      text-align: left;
     }
 
     .message {
@@ -40,17 +38,17 @@
     }
 
     .message.user {
-    align-self: flex-end;  /* user messages on the right */
-    background-color: rgba(204, 229, 255, 0.3);
-    color: white;
-    text-align: right;
+      align-self: flex-end;
+      background-color: rgba(204, 229, 255, 0.3);
+      color: white;
+      text-align: right;
     }
 
     .message.bot {
-    align-self: flex-start; /* bot messages on the left */
-    background-color: rgba(212, 237, 218, 0.3);
-    color: white;
-    text-align: left;
+      align-self: flex-start;
+      background-color: rgba(212, 237, 218, 0.3);
+      color: white;
+      text-align: left;
     }
 
     #inputArea {
@@ -59,17 +57,18 @@
     }
 
     #userInput {
-    background-color: rgba(0,0,0,0.3);
-    color: white;
-    border: none;
+      background-color: rgba(0,0,0,0.3);
+      color: white;
+      border: none;
     }
 
     #sendBtn {
-    background-color: #d5301a; /* matches your red gradient color */
-    color: white;
+      background-color: #d5301a;
+      color: white;
     }
+
     #sendBtn:hover {
-    background-color: #ff5733; /* slightly brighter on hover */
+      background-color: #ff5733;
     }
 
   </style>
@@ -109,19 +108,19 @@
         } else if (text.includes("love")) {
             response = "I love you too! ❤️";
         } else if (text.includes("work")) {
-            response = "Keeep up the good work. Don't forget to take breaks! You can do it!";
+            response = "Keep up the good work. Don't forget to take breaks! You can do it!";
         } else if (text.includes("receipt")) {
             response = "Oh! You want me to check the receipt? I can't do that yet, but soon I will!";
         } else if (text.includes("bye") || text.includes("goodbye")) {
             response = "Goodbye sweetie, I'll send you back to the main page. See you soon!";
             addMessage(response, "bot");
 
-            // Pause for 3 seconds, then redirect
+            // Pause for 3 seconds, then redirect to index
             setTimeout(() => {
-            window.location.href = "../index.html";
+              window.location.href = "https://Nawaugh03.github.io//index.html";
             }, 3000);
 
-            return; // Stop further processing
+            return;
         } else {
             response = "Hmm… tell me more, sweetie.";
         }
@@ -133,9 +132,9 @@
       const text = userInput.value.trim();
       if (!text) return;
 
-      addMessage(text, "user"); // show user message
-      botResponse(text);        // bot reply
-      userInput.value = "";     // clear input
+      addMessage(text, "user");
+      botResponse(text);
+      userInput.value = "";
     });
 
     userInput.addEventListener("keypress", (e) => {
