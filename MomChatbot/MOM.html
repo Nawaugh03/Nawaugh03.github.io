@@ -32,6 +32,15 @@
       messagesDiv.appendChild(msg);
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
+    async function getQuote() {
+        try {
+            const response = await fetch("https://zenquotes.io/api/random");
+            const data = await response.json();
+            return `${data[0].q} — ${data[0].a}`;
+        } catch (error) {
+            return "Sorry! Couldn't think of any right now. But stay strong🙃";
+        }
+    }
 
     function botResponse(text) {
         text = text.toLowerCase();
@@ -40,12 +49,19 @@
         if (text.includes("hello") || text.includes("hi")) {
             response = "Hi!! 😆";
         } else if (text.includes("how are you")) {
-            response = "I'm good, honey! Did you eat today?";
-        } else if (text.includes("love")) {
-            response = "I love you too! ❤️";
-        } else if (text.includes("work")) {
+            response = "I'm doing great";
+        } 
+        else if (text.includes("thank")||text.includes("thanks"))
+        {
+          response = "You're welcome😊";  
+        }
+        else if (text.includes("love")) {
+            response = "Aww your making me blush! 🥰";
+        } else if (text.includes("work")||text.includes("job")||text.includes("study")||text.includes("studies"))
+        {
             response = "Keep up the good work. Don't forget to take breaks! You can do it!";
-        } else if (text.includes("receipt")) {
+        } 
+        else if (text.includes("receipt")) {
             response = "Oh! You want me to check the receipt? I can't do that yet, but soon I will!";
         } else if (text.includes("bye") || text.includes("goodbye")) {
             response = "Goodbye sweetie, I'll send you back to the main page. See you soon!";
@@ -57,7 +73,16 @@
             }, 3000);
 
             return;
-        } else {
+        } 
+        else if(text.includes("quote")||text.includes("inspire")||text.includes("motivate")||text.includes("motivation")||text.includes("inspiration"))
+        {
+            getQuote().then(quote => {
+                addMessage(quote, "bot");
+            });
+            return; // Stop noormal response
+
+        }
+        else {
             response = "Hmm… tell me more, sweetie.";
         }
 
@@ -78,7 +103,7 @@
     });
 
     // Initial greeting
-    addMessage("Hello! I'm Nick's Mom Chatbot. Say hi to start!", "bot");
+    addMessage("Nice to meet you visior I am Nick's chatbot", "bot");
   </script>
 </body>
 </html>
