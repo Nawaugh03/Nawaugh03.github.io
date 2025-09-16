@@ -84,3 +84,67 @@ ul li a:hover {
   color: #ffcc00;
   text-decoration: underline;
 }
+ /* Chatbot-specific overrides */
+    #chatbox {
+      width: 350px;
+      max-height: 500px;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background-color: rgba(0,0,0,0.4);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      margin: 20px auto;
+    }
+
+    #messages {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+      overflow-y: auto;
+      text-align: left;
+    }
+
+    .message {
+      margin: 5px 0;
+      padding: 8px 12px;
+      border-radius: 15px;
+      max-width: 80%;
+      word-wrap: break-word;
+    }
+
+    .message.user {
+      align-self: flex-end;
+      background-color: rgba(204, 229, 255, 0.3);
+      color: white;
+      text-align: right;
+    }
+
+    .message.bot {
+      align-self: flex-start;
+      background-color: rgba(212, 237, 218, 0.3);
+      color: white;
+      text-align: left;
+    }
+
+    #inputArea {
+      display: flex;
+      border-top: 1px solid rgba(255,255,255,0.3);
+    }
+
+    #userInput {
+      background-color: rgba(0,0,0,0.3);
+      color: white;
+      border: none;
+    }
+
+    #sendBtn {
+      background-color: #d5301a;
+      color: white;
+    }
+
+    #sendBtn:hover {
+      background-color: #ff5733;
+    }
