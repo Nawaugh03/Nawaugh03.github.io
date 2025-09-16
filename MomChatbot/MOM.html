@@ -33,13 +33,14 @@
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
     async function getQuote() {
-        try {
-            const response = await fetch("https://api.quotable.io/random");
+            try {
+            const response = await fetch("https://api.allorigins.win/get?url=" + encodeURIComponent("https://zenquotes.io/api/random"));
             const data = await response.json();
-            return `${data.content} — ${data.author}`;
+            const quoteObj = JSON.parse(data.contents);
+            return `${quoteObj[0].q} — ${quoteObj[0].a}`;
         } catch (error) {
             console.error("Quote fetch error:", error);
-            return "Hmm… I couldn't fetch a quote right now. But don't let that discourages you. Keep pushing forward!";
+            return "Couldn't fetch a quote, but you’ve got this!";
         }
     }
 
