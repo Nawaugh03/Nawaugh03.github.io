@@ -76,9 +76,9 @@
         } 
         else if(text.includes("quote")||text.includes("inspire")||text.includes("motivate")||text.includes("motivation")||text.includes("inspiration"))
         {
-            getQuote().then(quote => {
-                addMessage(quote, "bot");
-            });
+            const quote = await getQuote();
+            addMessage(quote, "bot");
+            
             return; // Stop noormal response
 
         }
