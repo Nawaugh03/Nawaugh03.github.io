@@ -42,6 +42,12 @@
       messagesDiv.appendChild(msg);
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
+    async function uploadReceipt() {
+      // Fake test data
+      const fakeData = { message: "Receipt processed!", results: { total: 42.50 } };
+      return fakeData.message + " (Total $" + fakeData.results.total + ")";
+    }
+
     const quotes = [
   "Believe in yourself and all that you are. 💪",
   "Keep pushing forward, one step at a time. 🚀",
@@ -87,10 +93,12 @@
         {
             if (text.includes("yes")||text.includes("sure")||text.includes("yeah"))
             {
-                response = "Perfect! Please upload the receipt you'd like me to analyze.";
+                //response = "Perfect! Please upload the receipt you'd like me to analyze.";
                 // Here you would typically trigger a file input click or show the file input element
                 // For simplicity, we just inform the user to upload
                 // Insert response from flask file
+                const result = await uploadReceipt();
+                response = result;
                 recieptmode = false;
                 waitingForResponse = false;
             }
