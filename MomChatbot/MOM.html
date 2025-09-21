@@ -26,7 +26,8 @@
       <button id="sendBtn">Send</button>
     </div>
   </div>
-
+    <!-- 🔹 Hidden file input for receipt upload -->
+  <input type="file" id="receipt" style="display:none;" onchange="sendReciept()">
   <script>
     const messagesDiv = document.getElementById("messages");
     const userInput = document.getElementById("userInput");
@@ -65,6 +66,29 @@
   "Believe you can and you're halfway there. 🛤️",
   "Act as if what you do makes a difference. It does. 🌟"
 ];
+    
+    async function sendReceipt() {
+        const fileInput = document.getElementById("receipt");
+        if (!fileInput.files.length) {
+          addMessage("No file selected!", "bot");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("receipt", fileInput.files[0]);
+
+        try {
+          const response = await fetch("http://127.0.0.1:5000/upload_receipt", {
+            method: "POST",
+            body: formData
+          });
+
+          const data = await response.json();
+          addMessage("Pixie: " + data.message, "bot");
+        } catch (err) {
+          addMessage("Pixie: Oops, something went wrong uploading your file!", "bot");
+        }
+    }
     async function botResponse(text) {
         text = text.toLowerCase();
         let response;
@@ -97,8 +121,9 @@
                 // Here you would typically trigger a file input click or show the file input element
                 // For simplicity, we just inform the user to upload
                 // Insert response from flask file
-                const result = await uploadReceipt();
-                response = result;
+                response = "Please upload your receipt.";
+                let fileinput=document.getElementById("receipt").click(); // 🔹 Opens file picker
+               // 🔹 Call the upload function
                 recieptmode = false;
                 waitingForResponse = false;
             }
