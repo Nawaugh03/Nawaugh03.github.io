@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>Pixie</title>
+  <link rel="stylesheet" href="MomStyle.css">
+</head>
+<body>
+  <h1>Pixie</h1>
+  <p>
+    In Development: A friendly chatbot designed to offer encouragement and motivation. 
+    Whether you're facing challenges or just need a little boost, Pixie is here to chat 
+    and uplift your spirits!
+  </p>
+
+  <div id="chatbox">
+    <div id="messages"></div>
+    <div id="inputArea">
+      <input type="text" id="userInput" placeholder="Say something...">
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <h2>Upload Receipt</h2>
+  <input type="file" id="receipt">
+  <button id="uploadBtn">Upload</button>
+
+  <script>
+    const messagesDiv = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const uploadBtn = document.getElementById("uploadBtn");
+
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = text;
+      messagesDiv.appendChild(msg);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      addMessage("You: " + text, "user");
+      userInput.value = "";
+
+      const response = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: text })
+      });
+
+      const data = await response.json();
+      addMessage("Pixie: " + data.response, "bot");
+    }
+
+    async function uploadReceipt() {
+      const fileInput = document.getElementById("receipt");
+      if (!fileInput.files.length) return;
+
+      const formData = new FormData();
+      formData.append("receipt", fileInput.files[0]);
+
+      const response = await fetch("/upload_receipt", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+      addMessage("Pixie: " + data.message + " (Total $" + data.results.total + ")", "bot");
+    }
+
+    sendBtn.addEventListener("click", sendMessage);
+    userInput.addEventListener("keypress", (e) => { if (e.key === "Enter") sendMessage(); });
+    uploadBtn.addEventListener("click", uploadReceipt);
+
+    // Greeting
+    addMessage("Nice to meet you visitor, I am Nick's chatbot.", "bot");
+  </script>
+</body>
+</html>

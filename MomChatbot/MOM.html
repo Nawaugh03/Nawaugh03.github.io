@@ -31,7 +31,10 @@
     const messagesDiv = document.getElementById("messages");
     const userInput = document.getElementById("userInput");
     const sendBtn = document.getElementById("sendBtn");
-
+    const uploadBtn = document.getElementById("uploadBtn");
+    recieptmode = false;
+    waitingForResponse = false;
+    
     function addMessage(text, sender) {
       const msg = document.createElement("div");
       msg.classList.add("message", sender);
@@ -76,8 +79,37 @@
             response = "Keep up the good work. Don't forget to take breaks! You can do it!";
         } 
         else if (text.includes("receipt")) {
-            response = "Oh! You want me to check the receipt? I can't do that yet, but soon I will!";
-        } else if (text.includes("bye") || text.includes("goodbye")) {
+            response = "Oh! You want me to do the receipt analysis?";
+            recieptmode = true;
+            waitingForResponse = true;
+        } 
+        else if(waitingForResponse && recieptmode)
+        {
+            if (text.includes("yes")||text.includes("sure")||text.includes("yeah"))
+            {
+                response = "Perfect! Please upload the receipt you'd like me to analyze.";
+                // Here you would typically trigger a file input click or show the file input element
+                // For simplicity, we just inform the user to upload
+                // Insert response from flask file
+                recieptmode = false;
+                waitingForResponse = false;
+            }
+            
+            else if (text.includes("no")||text.includes("not now")||text.includes("maybe later"))
+            {
+                response = "No worries! If you change your mind, just let me know.";
+                recieptmode = false;
+                waitingForResponse = false;
+            }
+            else
+            {
+                response = "Please respond with 'yes' or 'no'. Do you want to upload a receipt for analysis?";
+            }
+        }
+         else if (text.includes("sad") || text.includes("unhappy") || text.includes("depressed") || text.includes("angry") || text.includes("upset")) {
+            response = "I'm sorry to hear that you're feeling this way. Remember, it's okay to have tough days. I'm here for you! If you want, I can share a motivational quote to help lift your spirits.";
+
+        }else if (text.includes("bye") || text.includes("goodbye")) {
             response = "Goodbye sweetie, I'll send you back to the main page. See you soon!";
             addMessage(response, "bot");
 
