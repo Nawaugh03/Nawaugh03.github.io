@@ -67,7 +67,7 @@
   "Act as if what you do makes a difference. It does. 🌟"
 ];
     
-    async function sendReceipt() {
+    async function sendReceipt(filename) {
         const fileInput = document.getElementById("receipt");
         if (!fileInput.files.length) {
           addMessage("No file selected!", "bot");
@@ -85,6 +85,7 @@
 
           const data = await response.json();
           addMessage("Pixie: " + data.message, "bot");
+
         } catch (err) {
           addMessage("Pixie: Oops, something went wrong uploading your file!", "bot");
         }
@@ -122,8 +123,9 @@
                 // For simplicity, we just inform the user to upload
                 // Insert response from flask file
                 response = "Please upload your receipt.";
-                let fileinput=document.getElementById("receipt").click(); // 🔹 Opens file picker
+                document.getElementById("receipt").click(); // 🔹 Opens file picker
                // 🔹 Call the upload function
+               
                 recieptmode = false;
                 waitingForResponse = false;
             }
@@ -179,7 +181,8 @@
     userInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") sendBtn.click();
     });
-
+    
+    document.getElementById("receipt").addEventListener("change", sendReceipt);
     // Initial greeting
     addMessage("Nice to meet you visior I am Nick's chatbot", "bot");
   </script>
