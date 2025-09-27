@@ -27,7 +27,7 @@
     </div>
   </div>
     <!-- 🔹 Hidden file input for receipt upload -->
-  <input type="file" id="receipt" style="display:none;" onchange="sendReciept()">
+  <input type="file" id="receipt" style="display:none;" onchange="sendReciept()" multiple-accept=".jpg,.jpeg,.png">
   <script>
     const messagesDiv = document.getElementById("messages");
     const userInput = document.getElementById("userInput");
@@ -43,12 +43,7 @@
       messagesDiv.appendChild(msg);
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
     }
-    async function uploadReceipt() {
-      // Fake test data
-      const fakeData = { message: "Receipt processed!", results: { total: 42.50 } };
-      return fakeData.message + " (Total $" + fakeData.results.total + ")";
-    }
-
+ 
     const quotes = [
   "Believe in yourself and all that you are. 💪",
   "Keep pushing forward, one step at a time. 🚀",
@@ -124,7 +119,7 @@
                 // Insert response from flask file
                 response = "Please upload your receipt.";
                 document.getElementById("receipt").click(); // 🔹 Opens file picker
-               // 🔹 Call the upload function
+    
                
                 recieptmode = false;
                 waitingForResponse = false;
