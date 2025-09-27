@@ -84,10 +84,10 @@
           });
 
           const data = await response.json();
-          addMessage("Pixie: " + data.message, "bot");
+          addMessage(data.message, "bot");
 
         } catch (err) {
-          addMessage("Pixie: Oops, something went wrong uploading your file!", "bot");
+          addMessage("Oops, something went wrong uploading your file!", "bot");
         }
     }
     async function botResponse(text) {
