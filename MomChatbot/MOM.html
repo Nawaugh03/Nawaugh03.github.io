@@ -64,7 +64,7 @@
 ];
     
     async function sendFile(filename) {
-        const fileInput = document.getElementById("receipt");
+        const fileInput = document.getElementById("file");
         if (!fileInput.files.length) {
           addMessage("No file selected!", "bot");
           return;
@@ -76,7 +76,7 @@
           }
 
         try {
-          const response = await fetch("http://127.0.0.1:5000/upload_images", {
+          const response = await fetch("http://127.0.0.1:5000/upload_files", {
             method: "POST",
             body: formData
           });
@@ -121,7 +121,7 @@
                 // For simplicity, we just inform the user to upload
                 // Insert response from flask file
                 response = "Please upload your receipt.";
-                document.getElementById("receipt").click(); // 🔹 Opens file picker
+                document.getElementById("file").click(); // 🔹 Opens file picker
     
                
                 uploadmode = false;
