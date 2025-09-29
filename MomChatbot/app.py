@@ -1,9 +1,8 @@
 from flask import Flask, render_template, request, send_file, session, jsonify
 from flask_cors import CORS
-from ReaderModel import RRModel
 import os, uuid
 
-UPLOAD_FOLDER = "Reciept-Reader/Receipts"
+UPLOAD_FOLDER = "MomChatbot/Receipts"
 app = Flask(__name__)
 CORS(app)
 #app.secret_key = "supersecretkey"  # needed for Flask sessions
@@ -23,15 +22,8 @@ def create_session_folder(base="sessions"):
 def index():
     return render_template("index.html")
 
-@app.route("/start_session")
-def start_session():
-    session_id, session_path = create_session_folder()
-    session["id"] = session_id
-    session["path"] = session_path
-    rrmodel.reset_results()  # clear any old results
-    return f"Session started: {session_id}"
 
-@app.route("/upload_receipt", methods=["POST"])
+@app.route("/upload_images", methods=["POST"])
 def upload_receipt():
     if "receipts" not in request.files:
         return jsonify({"message": "No file uploaded"}), 400
@@ -44,8 +36,8 @@ def upload_receipt():
     for file in files:
         if file.filename == "":
             continue  # Skip empty files
-        reciept_destination = os.path.join(os.getcwd(), UPLOAD_FOLDER)
-        filepath = os.path.join(reciept_destination, file.filename)
+        image_destination = os.path.join(os.getcwd(), UPLOAD_FOLDER)
+        filepath = os.path.join(image_destination, file.filename)
         file.save(filepath)
         saved_files.append(file.filename)
 
@@ -60,20 +52,8 @@ def upload_receipt():
 
     return jsonify({"message": f"Receipts saved: {', '.join(saved_files)}"})
 
-@app.route("/finish")
-def finish():
-    if "path" not in session:
-        return "No active session.", 400
-
-    # Save results into this session folder
-    excel_file = os.path.join(session["path"], "Results.xlsx")
-    rrmodel.save_results_excel(excel_file)
-
-    # Send Excel file back to user
-    return send_file(excel_file, as_attachment=True)
 
 if __name__ == "__main__":
-    rrmodel = RRModel("runs/detect/Fine_tuned_model8/weights/best.pt")
-    #if not os.path.exists(UPLOAD_FOLDER):
-    #    os.makedirs(UPLOAD_FOLDER)
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.run(debug=True)
