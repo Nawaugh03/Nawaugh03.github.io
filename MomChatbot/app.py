@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, send_file, session, jsonify
 from flask_cors import CORS
 import os, uuid
-
-UPLOAD_FOLDER = "MomChatbot/Receipts"
+import requests
+UPLOAD_FOLDER = "MomChatbot/Files"
 app = Flask(__name__)
 CORS(app)
 #app.secret_key = "supersecretkey"  # needed for Flask sessions
@@ -18,11 +18,27 @@ def create_session_folder(base="sessions"):
     os.makedirs(session_path)
     return session_id, session_path
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
 
+@app.route("/api/quote", methods=["GET"])
+def get_quote():
+    try:
+        res = requests.get("https://zenquotes.io/api/random")
+        data = res.json()[0]
+        return jsonify({
+            "quote": data["q"],
+            "author": data["a"]
+        })
+    except Exception as e:
+        return jsonify({
+            "quote": "Keep believing in yourself!",
+            "author": "Pixie Bot"
+        })
 
+    
 @app.route("/upload_images", methods=["POST"])
 def upload_receipt():
     if "receipts" not in request.files:

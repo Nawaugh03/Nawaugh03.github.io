@@ -155,10 +155,15 @@
         } 
         else if(text.includes("quote")||text.includes("inspire")||text.includes("motivate")||text.includes("motivation")||text.includes("inspiration"))
         {
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            addMessage(randomQuote, "bot");
-            return; // Stop noormal response
-
+            try {
+                const res = await fetch("http://127.0.0.1:5000/api/quote");
+                const data = await res.json();
+                const quoteMsg = `"${data.quote}" — ${data.author}`;
+                addMessage(quoteMsg, "bot");
+            } catch (error) {
+                addMessage("I couldn't reach the quote service right now, but remember: you’re amazing just as you are 💖", "bot");
+            }
+            return;
         }
         else {
             response = "Hmm… tell me more, sweetie.";
