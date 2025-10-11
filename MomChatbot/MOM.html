@@ -138,7 +138,7 @@
         else if(text.includes("quote")||text.includes("inspire")||text.includes("motivate")||text.includes("motivation")||text.includes("inspiration"))
         {
             try {
-                const res = await fetch("https://blastomycotic-encaustically-yoshiko.ngrok-free.dev/api/quote");
+                const res = await fetch("https://blastomycotic-encaustically-yoshiko.ngrok-free.dev/api/quote", {method: "GET"});
                 const data = await res.json();
                 const quoteMsg = `"${data.quote}" — ${data.author}`;
                 addMessage(quoteMsg, "bot");
