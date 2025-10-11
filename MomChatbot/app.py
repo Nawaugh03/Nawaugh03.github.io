@@ -4,7 +4,7 @@ import os, uuid
 import requests
 UPLOAD_FOLDER = "MomChatbot/Files"
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app)
 #app.secret_key = "supersecretkey"  # needed for Flask sessions
 
 
