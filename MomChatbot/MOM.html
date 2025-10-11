@@ -144,6 +144,7 @@
                 addMessage(quoteMsg, "bot");
             } catch (error) {
                 addMessage("I couldn't reach the quote service right now, but remember: you’re amazing just as you are 💖", "bot");
+                console.error("Error fetching quote:", error);
             }
             return;
         }
